@@ -28,7 +28,7 @@ const Header = () => {
     <Container as="header">
       <Row>
         <StyledHeader>
-          <LemonLogo className="__logo" />
+          <LemonLogo />
           <Overline100>Frontend - technical assignment</Overline100>
         </StyledHeader>
       </Row>
