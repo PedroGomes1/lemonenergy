@@ -19,12 +19,17 @@ const Image = styled.div(
   `,
 )
 
-const Info = styled.div(() => css``)
+const Info = styled.div(
+  () => css`
+    ${Overline100} {
+      margin-left: 6px !important;
+    }
+  `,
+)
 
 const Body = styled(PartialContainer)(
   ({ theme: { spacing, colors } }) => css`
     padding-top: ${spacing(2)};
-
     ${Image} {
       flex: 0 0 64px;
       height: 64px;
@@ -80,6 +85,8 @@ const Container = styled.div(
 
 const Footer = styled(PartialContainer)(
   ({ theme: { colors, spacing } }) => css`
+    display: flex;
+    justify-content: flex-end;
     > ${Body100} {
       svg {
         vertical-align: middle;
@@ -125,12 +132,10 @@ const Card = ({
       <Separator />
       <Footer>
         {stats.map(({ icon, value }, i) => (
-          <React.Fragment key={`stats_${i + 1}`}>
-            <Body100 data-testid={`stats_${i}`}>
-              <span>{icon} </span>
-              {value}
-            </Body100>
-          </React.Fragment>
+          <Body100 key={`stats_${i + 1}`} data-testid={`stats_${i}`}>
+            <span>{icon} </span>
+            {value}
+          </Body100>
         ))}
       </Footer>
     </Container>
