@@ -33,13 +33,14 @@ const useUsers = () => {
       lastIdRef.current = data[data.length - 1].id
     } catch (e) {
       dispatch({ type: 'ERROR', error: e })
+      // eslint-disable-next-line no-alert
+      alert(`Error: ${e.message}`)
     }
   }
 
   useEffect(() => {
     fetchMore()
-  })
-
+  }, [])
   return [{ users, loading, error }, { fetchMore }]
 }
 
