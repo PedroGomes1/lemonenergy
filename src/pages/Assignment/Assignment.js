@@ -64,19 +64,19 @@ const LoadingBar = styled.div(
   `,
 )
 
-const formatStats = ({ repos, gists }) => [
+const formatStats = ({ repos, public_gists }) => [
   {
     icon: <RepositoryIcon />,
     value: repos,
   },
   {
     icon: <GistIcon />,
-    value: gists,
+    value: public_gists,
   },
 ]
 
 const Assignment = () => {
-  const [{ loading, error, users = [] }, { fetchMore }] = useUsers()
+  const [{ loading, users = [] }, { fetchMore }] = useUsers()
 
   const listRef = useRef()
 
@@ -90,9 +90,6 @@ const Assignment = () => {
   }
 
   useInfiniteScroll(listRef, fetchMore)
-
-  // eslint-disable-next-line no-console
-  if (error) console.error(error)
 
   return (
     <Container as="section">
