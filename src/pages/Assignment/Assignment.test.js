@@ -157,16 +157,24 @@ describe('Assignment', () => {
   it(`should redirect to user profile's page`, async () => {
     mockRequests(2)
     const { getByTestId } = renderPage()
-    window.confirm = jest.fn(() => true)
     const grid = getByTestId('card_grid')
+
     await waitForDomChange(grid)
     fireEvent.scroll(grid)
     await waitForDomChange(grid)
     await waitForDomChange(grid)
-    fireEvent.click(getByTestId('card_51'))
 
-    expect(window.location.assign).toHaveBeenCalledWith(
-      'https://github.com/login52',
+    window.confirm = jest.fn(() => true)
+
+    const cardSelected = getByTestId('card_2')
+    fireEvent.click(cardSelected)
+
+    expect(window.confirm).toHaveBeenCalledWith(
+      `You wiil be redirected to login3's profile`,
+    )
+
+    expect(window.location.href).toHaveBeenCalledWith(
+      'https://github.com/login3',
     )
 
     window.confirm.mockRestore()
@@ -184,10 +192,7 @@ describe('Assignment', () => {
     await waitForDomChange(grid)
 
     fireEvent.click(getByTestId('card_51'))
-
-    expect(window.location.assign).not.toHaveBeenCalledWith(
-      'https://github.com/login52',
-    )
+    expect(window.location.assign).not.toHaveBeenCalled()
 
     window.confirm.mockRestore()
   })
